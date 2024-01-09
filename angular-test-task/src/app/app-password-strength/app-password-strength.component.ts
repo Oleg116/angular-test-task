@@ -15,6 +15,8 @@ export class PasswordStrengthComponent {
   checkPasswordStrength(event: Event): void {
     const value = (event.target as HTMLInputElement).value;
 
+    console.log(value, value.length);
+
     if (value === '') {
       this.sectionColors = ['gray', 'gray', 'gray'];
     } else if (value.length < 8) {
@@ -28,7 +30,9 @@ export class PasswordStrengthComponent {
         this.sectionColors = ['green', 'green', 'green'];
       } else if ((hasLetters && hasDigits) || (hasLetters && hasSymbols) || (hasDigits && hasSymbols)) {
         this.sectionColors = ['yellow', 'yellow', 'gray'];
-      } else if (hasLetters && !hasDigits && !hasSymbols) {
+      } else if (hasLetters && !hasDigits && !hasSymbols
+        || !hasLetters && hasDigits && !hasSymbols
+        || !hasLetters && !hasDigits && hasSymbols) {
         this.sectionColors = ['red', 'gray', 'gray'];
       }
     }
